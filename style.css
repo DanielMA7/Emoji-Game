@@ -1,0 +1,14 @@
+:root {
+    --primaryLight: ;
+    --secondaryLight: ;
+    --accentLight: ;
+    --primaryDark: ;
+    --secondaryDark: ;
+    --accentDark: ;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
