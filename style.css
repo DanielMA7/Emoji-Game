@@ -69,6 +69,13 @@ h1 {
     align-items: center;
 }
 
+.hint-image:hover {
+    cursor: pointer;
+    animation-name: hint-rotate;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
 .input-space {
     display: flex;
     flex-direction: row;
@@ -115,4 +122,27 @@ h1 {
     border-radius: 0px 10px 10px 0px;
     font-size: 18px;
     font-weight: 400;
+}
+
+.submit-guess:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+@keyframes hint-rotate{
+    10%{
+        rotate: 30deg;
+    }
+    25%{
+        rotate: -30deg;
+    }
+    50%{
+        rotate: 15deg;
+    }
+    75%{
+        rotate: -15deg;
+    }
+    100% {
+        rotate: 0deg;
+    }
 }
