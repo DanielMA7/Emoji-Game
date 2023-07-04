@@ -5,6 +5,8 @@
     --primaryDark: #1A1E2D;
     --secondaryDark: #1B2F56;;
     --accentDark: #22263F;
+    --hintMain: #001E3D;
+    --hintAccent: #198CFE; 
 }
 
 * {
@@ -131,6 +133,42 @@ h1 {
 .submit-guess:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+
+body div {
+    position: relative;
+}
+
+.hint-box {
+    position: fixed;
+    width: 360px;
+    height: 270px;
+    top: 43%;
+    left: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.hints {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 70px;
+    width: 340px;
+    background-color: var(--hintMain);
+    border: 3px solid var(--hintAccent);
+    gap: 10px;
+}
+
+.hints span {
+    font-size: 18px;
+    font-weight: bold;
+
 }
 
 @keyframes hint-rotate{
