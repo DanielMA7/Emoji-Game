@@ -41,7 +41,7 @@ function showHint() {
   fetch(`/levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
-      if(`${userInfo["hintsUsed"]}`< 3) {
+      if(`${userInfo["hintsUsed"]}`< data["hints"].length) {
         let hintBox = document.createElement("div")
         let hintImg = document.createElement("img")
         let hintText = document.createElement("span")
@@ -74,13 +74,14 @@ function submitAnswer () {
     .then(data => {
       let levelAnswer = data["answer"]
       if (levelAnswer == userGuess) {
+        guessInput.value= ""
+        
         userInfo["level"]++
         userInfo["hintsUsed"] = 0
         document.getElementById("hint-box").innerHTML = "";
-        guessInput.value= ""
         loadLevel()
       }else{
-        
+
       }
     })
     .catch(error => {
