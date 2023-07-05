@@ -134,6 +134,8 @@ function submitAnswer () {
   console.log(userGuess)
 }
 
+// Allowing for users to press "enter" to submit answers
+
 document.getElementById("guess-input").addEventListener("keydown", function (e) {
   if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
       submitAnswer();
