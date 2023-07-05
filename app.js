@@ -11,6 +11,7 @@ const emojiContainer = document.getElementById("emoji-display")
 const hintBtn = document.getElementById("hint-btn")
 const guessInput = document.getElementById("guess-input")
 const levelIndicator = document.getElementById("level-indicator")
+const answerValidatorSpace = document.getElementById("answer-validation-display")
 
 // Setting loading the images for each level based on the user info
 
@@ -64,6 +65,48 @@ function showHint() {
     });
 }
 
+// Correct or Incorrect reaction
+
+function answerReaction(result) {
+  if(result == true) {
+    document.getElementById("answer-validation-display").innerHTML= "";
+    let reactionBox = document.createElement("div");
+    let reactionImg = document.createElement("img");
+    let reactionText = document.createElement("span");
+  
+    reactionBox.classList.add("correct-answer");
+  
+    reactionImg.src = "/assets/misc/correct-img.png";
+  
+    reactionText.innerHTML = "Congratulations! You got it!";
+    
+    reactionBox.appendChild(reactionImg);
+    reactionBox.appendChild(reactionText);
+    document.getElementById("answer-validation-display").appendChild(reactionBox);
+    setTimeout(function(){
+      document.getElementById("answer-validation-display").innerHTML= "";
+    },3000)
+  }else{
+    document.getElementById("answer-validation-display").innerHTML= "";
+    let reactionBox = document.createElement("div");
+    let reactionImg = document.createElement("img");
+    let reactionText = document.createElement("span");
+    
+    reactionBox.classList.add("incorrect-answer");
+    
+    reactionImg.src = "/assets/misc/incorrect-img.png";
+    
+    reactionText.innerHTML = "Unlucky! Try again!";
+      
+    reactionBox.appendChild(reactionImg);
+    reactionBox.appendChild(reactionText);
+    document.getElementById("answer-validation-display").appendChild(reactionBox);
+    setTimeout(function(){
+      document.getElementById("answer-validation-display").innerHTML= "";
+    },3000)
+  }
+}
+
 // Validating the answer
 
 function submitAnswer () {
@@ -74,14 +117,14 @@ function submitAnswer () {
     .then(data => {
       let levelAnswer = data["answer"]
       if (levelAnswer == userGuess) {
+        answerReaction(true)
         guessInput.value= ""
-        
         userInfo["level"]++
         userInfo["hintsUsed"] = 0
         document.getElementById("hint-box").innerHTML = "";
         loadLevel()
       }else{
-
+        answerReaction(false)
       }
     })
     .catch(error => {
@@ -90,5 +133,11 @@ function submitAnswer () {
 
   console.log(userGuess)
 }
+
+document.getElementById("guess-input").addEventListener("keydown", function (e) {
+  if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+      submitAnswer();
+  }
+});
 
 

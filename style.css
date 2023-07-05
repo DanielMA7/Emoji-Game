@@ -6,7 +6,11 @@
     --secondaryDark: #1B2F56;;
     --accentDark: #22263F;
     --hintMain: #001E3D;
-    --hintAccent: #198CFE; 
+    --hintAccent: #198CFE;
+    --correctMain: #0C3117;
+    --correctAccent: #2EBF57;
+    --incorrectMain: #3D0000;
+    --incorrectAccent: #FF2525; 
 }
 
 * {
@@ -68,6 +72,19 @@ h1 {
     align-items: center;
     gap: 40px;
 }
+
+.emojiDisplay img:nth-child(odd) {
+    animation-name: hint-rotate;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+.emojiDisplay img:nth-child(even) {
+    animation-name: hint-rotate-reverse;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
 
 .hint-space {
     display: flex;
@@ -173,6 +190,46 @@ body div {
 
 }
 
+.answer-validation-display {
+    position: fixed;
+    width: 360px;
+    height: 100px;
+    top: 82%;
+    left: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.correct-answer {
+    width: 340px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--correctMain);
+    border: 3px solid var(--correctAccent);
+    gap: 10px;
+}
+
+.incorrect-answer {
+    width: 340px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--incorrectMain);
+    border: 3px solid var(--incorrectAccent);
+    gap: 10px;
+}
+
+
+/* Animations */
+
 @keyframes hint-rotate{
     10%{
         rotate: 30deg;
@@ -185,6 +242,24 @@ body div {
     }
     75%{
         rotate: -15deg;
+    }
+    100% {
+        rotate: 0deg;
+    }
+}
+
+@keyframes hint-rotate-reverse{
+    10%{
+        rotate: -30deg;
+    }
+    25%{
+        rotate: 30deg;
+    }
+    50%{
+        rotate: -15deg;
+    }
+    75%{
+        rotate: 15deg;
     }
     100% {
         rotate: 0deg;
