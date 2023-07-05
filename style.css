@@ -163,11 +163,13 @@ body div {
     background-color: var(--hintMain);
     border: 3px solid var(--hintAccent);
     gap: 10px;
+    padding-left: 10px;
 }
 
 .hints span {
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: bold;
+    align-content: center;
 
 }
 
