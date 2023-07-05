@@ -7,13 +7,15 @@ let userInfo = {
 
 // Setting important variables for the document
 
-const emojiContainer = document.getElementById("emojiDisplay")
+const emojiContainer = document.getElementById("emoji-display")
 const hintBtn = document.getElementById("hint-btn")
+const guessInput = document.getElementById("guess-input")
+const levelIndicator = document.getElementById("level-indicator")
 
 // Setting loading the images for each level based on the user info
 
 function loadLevel (){
-  document.getElementById("emojiDisplay").innerHTML = "";
+  document.getElementById("emoji-display").innerHTML = "";
   fetch(`/assets/level${userInfo["level"]}/image-list.json`)
     .then(response => response.json())
     .then(data => {
@@ -21,6 +23,7 @@ function loadLevel (){
         var img = document.createElement('img');
         img.src = `/assets/level${userInfo["level"]}/images/` + filename;
         emojiContainer.appendChild(img);
+        levelIndicator.innerHTML = `Level: ${userInfo["level"]}`
       });
     })
     .catch(error => {
@@ -60,4 +63,31 @@ function showHint() {
       console.log(error);
     });
 }
+
+// Validating the answer
+
+function submitAnswer () {
+  let userGuess = guessInput.value.toLowerCase()
+
+  fetch(`/levelinfo/level${userInfo["level"]}-info.json`)
+    .then(response => response.json())
+    .then(data => {
+      let levelAnswer = data["answer"]
+      if (levelAnswer == userGuess) {
+        userInfo["level"]++
+        userInfo["hintsUsed"] = 0
+        document.getElementById("hint-box").innerHTML = "";
+        guessInput.value= ""
+        loadLevel()
+      }else{
+        
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  console.log(userGuess)
+}
+
 

@@ -16,8 +16,8 @@
                <h1>Moji</h1>
            </div>
            <div class="emoji-container">
-               <h3>Level 1:</h3>
-               <div class="emojiDisplay" id="emojiDisplay">
+               <h3 id="level-indicator"></h3>
+               <div class="emojiDisplay" id="emoji-display">
 
                </div>
            </div>
@@ -25,14 +25,14 @@
                 <image src="assets/misc/Hint.png" class="hint-image" id="hint-btn" onclick="showHint()"></image>
            </div>
            <div class="input-space">
-               <input placeholder="Enter your guess here..." class="guess-box">
-               <button class="submit-guess">Guess</button>
+               <input placeholder="Enter your guess here..." class="guess-box" id="guess-input">
+               <button class="submit-guess" onclick="submitAnswer()">Guess</button>
             </div>
         </div>
         <div class="hint-box" id="hint-box">
 
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </body>
 </html>
