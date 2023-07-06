@@ -161,8 +161,6 @@ function submitAnswer () {
     .catch(error => {
       console.log(error);
     });
-
-  console.log(userGuess)
 }
 
 // Allowing for users to press "enter" to submit answers
