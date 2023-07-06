@@ -43,7 +43,7 @@ loadLevel()
 // Showing hints based on the level they are on and the amount of hints used
 
 function showHint() {
-  fetch(`/levelinfo/level${userInfo["level"]}-info.json`)
+  fetch(`https://danielma7.github.io/Moji/levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
       if(`${userInfo["hintsUsed"]}`< data["hints"].length) {
@@ -131,7 +131,7 @@ function answerReaction(result) {
 function submitAnswer () {
   let userGuess = guessInput.value.toLowerCase()
 
-  fetch(`/levelinfo/level${userInfo["level"]}-info.json`)
+  fetch(`https://danielma7.github.io/Moji/levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
       let levelAnswer = data["answer"]
