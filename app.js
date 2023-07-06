@@ -43,7 +43,7 @@ loadLevel()
 // Showing hints based on the level they are on and the amount of hints used
 
 function showHint() {
-  fetch(`https://danielma7.github.io/Moji/levelinfo/level${userInfo["level"]}-info.json`)
+  fetch(`./levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
       if(`${userInfo["hintsUsed"]}`< data["hints"].length) {
@@ -53,7 +53,7 @@ function showHint() {
   
         hintBox.classList.add("hints")
   
-        hintImg.src = "https://danielma7.github.io/Moji/assets/misc/Hintimg.png"
+        hintImg.src = "./assets/misc/Hintimg.png"
   
         hintText.innerHTML = `Hint: ${data["hints"][userInfo["hintsUsed"]]}`
     
@@ -80,7 +80,7 @@ function answerReaction(result) {
   
     reactionBox.classList.add("correct-answer");
   
-    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/correct-img.png";
+    reactionImg.src = "./assets/misc/correct-img.png";
   
     reactionText.innerHTML = "Congratulations! You got it!";
     
@@ -98,7 +98,7 @@ function answerReaction(result) {
     
     reactionBox.classList.add("incorrect-answer");
     
-    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/incorrect-img.png";
+    reactionImg.src = "./assets/misc/incorrect-img.png";
     
     reactionText.innerHTML = "Unlucky! Try again!";
       
@@ -116,7 +116,7 @@ function answerReaction(result) {
     
     reactionBox.classList.add("winner-reaction");
     
-    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/correct-img.png";
+    reactionImg.src = "./assets/misc/correct-img.png";
     
     reactionText.innerHTML = "You win!!!";
       
@@ -131,7 +131,7 @@ function answerReaction(result) {
 function submitAnswer () {
   let userGuess = guessInput.value.toLowerCase()
 
-  fetch(`https://danielma7.github.io/Moji/levelinfo/level${userInfo["level"]}-info.json`)
+  fetch(`./levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
       let levelAnswer = data["answer"]
