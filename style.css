@@ -11,6 +11,8 @@
     --correctAccent: #2EBF57;
     --incorrectMain: #3D0000;
     --incorrectAccent: #FF2525; 
+    --winnerMain: #3D2D00;
+    --winnerAccent: #FFC62A;
 }
 
 * {
@@ -227,6 +229,17 @@ body div {
     gap: 10px;
 }
 
+.winner-reaction {
+    width: 340px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--winnerMain);
+    border: 3px solid var(--winnerAccent);
+    gap: 10px;
+}
 
 /* Animations */
 
