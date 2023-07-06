@@ -24,7 +24,11 @@ function loadLevel (){
         var img = document.createElement('img');
         img.src = `/assets/level${userInfo["level"]}/images/` + filename;
         emojiContainer.appendChild(img);
-        levelIndicator.innerHTML = `Level: ${userInfo["level"]}`
+        if(userInfo["level"] == 11) {
+        levelIndicator.innerHTML = "The end!"
+        }else{
+          levelIndicator.innerHTML = `Level: ${userInfo["level"]}`
+        }
       });
     })
     .catch(error => {
@@ -68,7 +72,7 @@ function showHint() {
 // Correct or Incorrect reaction
 
 function answerReaction(result) {
-  if(result == true) {
+  if(result == 1) {
     document.getElementById("answer-validation-display").innerHTML= "";
     let reactionBox = document.createElement("div");
     let reactionImg = document.createElement("img");
@@ -86,7 +90,7 @@ function answerReaction(result) {
     setTimeout(function(){
       document.getElementById("answer-validation-display").innerHTML= "";
     },3000)
-  }else{
+  }else if(result == 2){
     document.getElementById("answer-validation-display").innerHTML= "";
     let reactionBox = document.createElement("div");
     let reactionImg = document.createElement("img");
@@ -104,6 +108,21 @@ function answerReaction(result) {
     setTimeout(function(){
       document.getElementById("answer-validation-display").innerHTML= "";
     },3000)
+  }else if(result == 3) {
+    document.getElementById("answer-validation-display").innerHTML= "";
+    let reactionBox = document.createElement("div");
+    let reactionImg = document.createElement("img");
+    let reactionText = document.createElement("span");
+    
+    reactionBox.classList.add("winner-reaction");
+    
+    reactionImg.src = "/assets/misc/correct-img.png";
+    
+    reactionText.innerHTML = "You win!!!";
+      
+    reactionBox.appendChild(reactionImg);
+    reactionBox.appendChild(reactionText);
+    document.getElementById("answer-validation-display").appendChild(reactionBox);
   }
 }
 
@@ -117,14 +136,26 @@ function submitAnswer () {
     .then(data => {
       let levelAnswer = data["answer"]
       if (levelAnswer == userGuess) {
-        answerReaction(true)
-        guessInput.value= ""
-        userInfo["level"]++
-        userInfo["hintsUsed"] = 0
-        document.getElementById("hint-box").innerHTML = "";
-        loadLevel()
+        if(userInfo["level"] == 10) {
+          answerReaction(3)
+          guessInput.value= ""
+          guessInput.setAttribute('disabled', '')
+          guessInput.setAttribute("placeholder", "Refresh to play again!")
+          userInfo["level"]++
+          userInfo["hintsUsed"] = 0
+          document.getElementById("hint-box").innerHTML = "";
+          loadLevel()
+        }else{
+          answerReaction(1)
+          guessInput.value= ""
+          userInfo["level"]++
+          userInfo["hintsUsed"] = 0
+          document.getElementById("hint-box").innerHTML = "";
+          loadLevel()
+        }
+        
       }else{
-        answerReaction(false)
+        answerReaction(2)
       }
     })
     .catch(error => {
