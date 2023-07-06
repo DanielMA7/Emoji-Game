@@ -17,12 +17,12 @@ const answerValidatorSpace = document.getElementById("answer-validation-display"
 
 function loadLevel (){
   document.getElementById("emoji-display").innerHTML = "";
-  fetch(`/assets/level${userInfo["level"]}/image-list.json`)
+  fetch(`https://danielma7.github.io/Moji/assets/level${userInfo["level"]}/image-list.json`)
     .then(response => response.json())
     .then(data => {
       data.forEach(filename => {
         var img = document.createElement('img');
-        img.src = `/assets/level${userInfo["level"]}/images/` + filename;
+        img.src = `https://danielma7.github.io/Moji/assets/level${userInfo["level"]}/images/` + filename;
         emojiContainer.appendChild(img);
         if(userInfo["level"] == 11) {
         levelIndicator.innerHTML = "The end!"
@@ -53,7 +53,7 @@ function showHint() {
   
         hintBox.classList.add("hints")
   
-        hintImg.src = "/assets/misc/Hintimg.png"
+        hintImg.src = "https://danielma7.github.io/Moji/assets/misc/Hintimg.png"
   
         hintText.innerHTML = `Hint: ${data["hints"][userInfo["hintsUsed"]]}`
     
@@ -80,7 +80,7 @@ function answerReaction(result) {
   
     reactionBox.classList.add("correct-answer");
   
-    reactionImg.src = "/assets/misc/correct-img.png";
+    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/correct-img.png";
   
     reactionText.innerHTML = "Congratulations! You got it!";
     
@@ -98,7 +98,7 @@ function answerReaction(result) {
     
     reactionBox.classList.add("incorrect-answer");
     
-    reactionImg.src = "/assets/misc/incorrect-img.png";
+    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/incorrect-img.png";
     
     reactionText.innerHTML = "Unlucky! Try again!";
       
@@ -116,7 +116,7 @@ function answerReaction(result) {
     
     reactionBox.classList.add("winner-reaction");
     
-    reactionImg.src = "/assets/misc/correct-img.png";
+    reactionImg.src = "https://danielma7.github.io/Moji/assets/misc/correct-img.png";
     
     reactionText.innerHTML = "You win!!!";
       
