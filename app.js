@@ -86,9 +86,11 @@ function answerReaction(result) {
     
     reactionBox.appendChild(reactionImg);
     reactionBox.appendChild(reactionText);
+    answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
     setTimeout(function(){
       document.getElementById("answer-validation-display").innerHTML= "";
+      answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 2){
     document.getElementById("answer-validation-display").innerHTML= "";
@@ -104,9 +106,11 @@ function answerReaction(result) {
       
     reactionBox.appendChild(reactionImg);
     reactionBox.appendChild(reactionText);
+    answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
     setTimeout(function(){
       document.getElementById("answer-validation-display").innerHTML= "";
+      answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 3) {
     document.getElementById("answer-validation-display").innerHTML= "";
@@ -122,6 +126,7 @@ function answerReaction(result) {
       
     reactionBox.appendChild(reactionImg);
     reactionBox.appendChild(reactionText);
+    answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
   }
 }
