@@ -28,6 +28,7 @@ function loadLevel (){
         emojiContainer.appendChild(img);
         if(userInfo["level"] == 11) {
         levelIndicator.innerHTML = "The end!"
+        document.getElementById("hints-left").innerHTML = ""
         }else{
           levelIndicator.innerHTML = `Level: ${userInfo["level"]}`
           showHintsLeft()
@@ -80,12 +81,7 @@ function showHintsLeft() {
   fetch(`./levelinfo/level${userInfo["level"]}-info.json`)
     .then(response => response.json())
     .then(data => {
-      if(userInfo["level"] >= 10) {
-        document.getElementById("hints-left").innerHTML = ""
-      }else{
         document.getElementById("hints-left").innerHTML =  (data["hints"].length - userInfo["hintsUsed"]) + " hint(s) left for this level."
-        
-      }
     })
     .catch(error => {
       console.log(error);
@@ -98,7 +94,6 @@ function showHintsLeft() {
 
 function answerReaction(result) {
   if(result == 1) {
-    document.getElementById("answer-validation-display").innerHTML= "";
     let reactionBox = document.createElement("div");
     let reactionImg = document.createElement("img");
     let reactionText = document.createElement("span");
@@ -119,7 +114,6 @@ function answerReaction(result) {
       answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 2){
-    document.getElementById("answer-validation-display").innerHTML= "";
     let reactionBox = document.createElement("div");
     let reactionImg = document.createElement("img");
     let reactionText = document.createElement("span");
@@ -140,7 +134,6 @@ function answerReaction(result) {
       answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 3) {
-    document.getElementById("answer-validation-display").innerHTML= "";
     let reactionBox = document.createElement("div");
     let reactionImg = document.createElement("img");
     let reactionText = document.createElement("span");
