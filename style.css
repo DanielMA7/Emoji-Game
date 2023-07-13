@@ -74,6 +74,9 @@ h1 {
     align-items: center;
     gap: 40px;
 }
+.emojiDisplay img {
+        width: 64px;
+    }
 
 .emojiDisplay img:nth-child(odd) {
     animation-name: hint-rotate;
