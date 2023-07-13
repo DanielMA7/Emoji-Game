@@ -13,6 +13,8 @@
     --incorrectAccent: #FF2525; 
     --winnerMain: #3D2D00;
     --winnerAccent: #FFC62A;
+    --skipMain: #1B003D;
+    --skipAccent: #841FFF;
 }
 
 * {
@@ -93,8 +95,10 @@ h1 {
 
 .hint-space {
     display: flex;
-    justify-content: center;
+    width: max-content;
     align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
 .hint-image:hover {
@@ -208,6 +212,18 @@ body div {
     flex-direction: column;
 }
 
+.skipped-answer {
+    width: 340px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--skipMain);
+    border: 3px solid var(--skipAccent);
+    gap: 10px;
+}
+
 .correct-answer {
     width: 340px;
     height: 70px;
@@ -285,7 +301,7 @@ body div {
 
 /*    Responsive design    */
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 450px) {
     body {
         background-color: #080B16;
         display: flex;
@@ -321,7 +337,7 @@ body div {
         gap: 40px;
     }
     .emojiDisplay img {
-        width: 40px;
+        width: 25px;
     }
     .hint-box {
         position: static;
@@ -360,162 +376,49 @@ body div {
         font-family: "Jost", sans-serif;
         padding-left: 15px;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 0.9rem;
         user-select: none;
         -webkit-user-select: none;
     
     }
+    .guess-box::placeholder{
+        font-size: 0.9rem;
+    }
     .emoji-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-    }
-    .answer-validation-display {
-        position: static;
-        width: 250px;
-        height: 100px;
-        top: 75%;
-        left: 3.5%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        flex-direction: column;
-        display: none;
-    }
-    
-    .correct-answer {
-        width: 220px;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        background-color: var(--correctMain);
-        border: 3px solid var(--correctAccent);
-        gap: 10px;
-    }
-    
-    .incorrect-answer {
-        width: 220px;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        background-color: var(--incorrectMain);
-        border: 3px solid var(--incorrectAccent);
-        gap: 10px;
-        z-index: 3;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    body {
-        background-color: #080B16;
-        display: flex;
         justify-content: center;
         align-items: start;
-        height: 100vh;
-        width: 100vw;
-        padding-top: 30px;
-        overflow-x: hidden;
-     }
-     body div {
-        width: max-content;
-     }
-   
-    .middleDiv {
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .emojiDisplay {
-        width: 300px;
-        height: 90px;
-        background-color: var(--primaryDark);
-        border: 4px solid var(--accentDark);
-        border-radius: 10px;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-    }
-    .emojiDisplay img {
-        width: 40px;
-    }
-    .hint-box {
-        position: static;
-        width: 250px;
-        height: fit-content;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 10px;
-        flex-direction: column;
-    }
-    .hint-box img {
-        height: 20px;
-    } 
-    .submit-guess {
-        width: 70px;
-        height: 56px;
-        border-top:3px solid var(--accentDark) ;
-        border-bottom: 3px solid var(--accentDark);
-        border-right: 3px solid var(--accentDark);
-        background-color: var(--secondaryDark);
-        border-left: 0px none;
-        border-radius: 0px 10px 10px 0px;
-        font-size: 0.9rem;
-        font-weight: 400;
-    }
-    .guess-box {
-        width: 230px;
-        height: 50px;
-        border-radius: 10px 0px 0px 10px;
-        border-top: 3px solid var(--accentDark);
-        border-bottom: 3px solid var(--accentDark);
-        border-left: 3px solid var(--accentDark);
-        background-color: var(--primaryDark);
-        border-right: 0px none;
-        font-family: "Jost", sans-serif;
-        padding-left: 15px;
-        font-weight: 400;
-        font-size: 18px;
-        user-select: none;
-        -webkit-user-select: none;
-    
-    }
-    .emoji-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         gap: 5px;
     }
     .answer-validation-display {
         position: static;
-        width: 360px;
+        width: 250px;
         height: 100px;
         top: 75%;
         left: 3.5%;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 5px;
         flex-direction: column;
         display: none;
     }
     
+    .skipped-answer {
+        width: 250px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: var(--skipMain);
+        border: 3px solid var(--skipAccent);
+        gap: 10px;
+    }
+
     .correct-answer {
-        width: 340px;
+        width: 250px;
         height: 70px;
         display: flex;
         justify-content: center;
@@ -527,7 +430,7 @@ body div {
     }
     
     .incorrect-answer {
-        width: 340px;
+        width: 250px;
         height: 70px;
         display: flex;
         justify-content: center;
@@ -538,9 +441,21 @@ body div {
         gap: 10px;
         z-index: 3;
     }
+    .winner-reaction {
+        width: 250px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: var(--winnerMain);
+        border: 3px solid var(--winnerAccent);
+        gap: 10px;
+        z-index: 3;
+    }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 450px) {
     body {
         background-color: #080B16;
         display: flex;
@@ -576,7 +491,7 @@ body div {
         gap: 40px;
     }
     .emojiDisplay img {
-        width: 64px;
+        width: 40px;
     }
     .hint-box {
         position: static;
@@ -624,7 +539,7 @@ body div {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: start;
         gap: 5px;
     }
     .answer-validation-display {
@@ -641,8 +556,20 @@ body div {
         display: none;
     }
     
+    .skipped-answer {
+        width: 350px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: var(--skipMain);
+        border: 3px solid var(--skipAccent);
+        gap: 10px;
+    }
+
     .correct-answer {
-        width: 340px;
+        width: 350px;
         height: 70px;
         display: flex;
         justify-content: center;
@@ -654,7 +581,7 @@ body div {
     }
     
     .incorrect-answer {
-        width: 340px;
+        width: 350px;
         height: 70px;
         display: flex;
         justify-content: center;

@@ -3,6 +3,8 @@
 let userInfo = {
     "level": 1,
     "hintsUsed": 0,
+    "totalHintsUsed": 0,
+    "skipsUsed": 0 
 }
 
 // Setting important variables for the document
@@ -28,6 +30,7 @@ function loadLevel (){
         levelIndicator.innerHTML = "The end!"
         }else{
           levelIndicator.innerHTML = `Level: ${userInfo["level"]}`
+          showHintsLeft()
         }
       });
     })
@@ -62,12 +65,34 @@ function showHint() {
         document.getElementById("hint-box").appendChild(hintBox)
 
         userInfo["hintsUsed"]+= 1
+        userInfo["totalHintsUsed"]+= 1
+        showHintsLeft()
       }
     })
     .catch(error => {
       console.log(error);
     });
 }
+
+/*     Show hints left     */
+
+function showHintsLeft() {
+  fetch(`./levelinfo/level${userInfo["level"]}-info.json`)
+    .then(response => response.json())
+    .then(data => {
+      if(userInfo["level"] >= 10) {
+        document.getElementById("hints-left").innerHTML = ""
+      }else{
+        document.getElementById("hints-left").innerHTML =  (data["hints"].length - userInfo["hintsUsed"]) + " hint(s) left for this level."
+        
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+
 
 // Correct or Incorrect reaction
 
@@ -86,10 +111,11 @@ function answerReaction(result) {
     
     reactionBox.appendChild(reactionImg);
     reactionBox.appendChild(reactionText);
+    reactionBox.setAttribute("id", "correct-answer-r")
     answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
     setTimeout(function(){
-      document.getElementById("answer-validation-display").innerHTML= "";
+      document.getElementById("correct-answer-r").remove()
       answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 2){
@@ -106,10 +132,11 @@ function answerReaction(result) {
       
     reactionBox.appendChild(reactionImg);
     reactionBox.appendChild(reactionText);
+    reactionBox.setAttribute("id", "incorrect-answer-r")
     answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
     setTimeout(function(){
-      document.getElementById("answer-validation-display").innerHTML= "";
+      document.getElementById("incorrect-answer-r").remove()
       answerValidatorSpace.style.display = "none"
     },3000)
   }else if(result == 3) {
@@ -128,6 +155,51 @@ function answerReaction(result) {
     reactionBox.appendChild(reactionText);
     answerValidatorSpace.style.display = "block"
     document.getElementById("answer-validation-display").appendChild(reactionBox);
+
+/*                 Showing skipped questions              */
+
+    let skipsBox = document.createElement("div");
+    let skipsText = document.createElement("span");
+    
+    skipsBox.classList.add("skipped-answer");
+    
+    skipsText.innerHTML = `You skipped ${userInfo["skipsUsed"]} questions`;
+      
+    skipsBox.appendChild(skipsText);
+    answerValidatorSpace.style.display = "block"
+    document.getElementById("answer-validation-display").appendChild(skipsBox);
+
+/*                 Showing hints used              */
+
+    let hintsUsedBox = document.createElement("div");
+    let hintsUsedText = document.createElement("span");
+    
+    hintsUsedBox.classList.add("skipped-answer");
+    
+    hintsUsedText.innerHTML = `You used ${userInfo["totalHintsUsed"]} hints`;
+      
+    hintsUsedBox.appendChild(hintsUsedText);
+    answerValidatorSpace.style.display = "block"
+    document.getElementById("answer-validation-display").appendChild(hintsUsedBox);
+
+  }else if(result == 4) {
+    document.getElementById("answer-validation-display").innerHTML= "";
+    let reactionBox = document.createElement("div");
+    let reactionText = document.createElement("span");
+    
+    reactionBox.classList.add("skipped-answer");
+    
+    reactionText.innerHTML = "You skipped the the level.";
+      
+    reactionBox.appendChild(reactionText);
+    reactionBox.setAttribute("id", "skipped-reaction")
+    answerValidatorSpace.style.display = "block"
+    document.getElementById("answer-validation-display").appendChild(reactionBox);
+    setTimeout(function(){
+      document.getElementById("skipped-reaction").remove()
+
+      answerValidatorSpace.style.display = "none"
+    },3000)
   }
 }
 
@@ -168,6 +240,26 @@ function submitAnswer () {
     });
 }
 
+function skipAnswer() {
+  if(userInfo["level"] == 10) {
+    answerReaction(3)
+    guessInput.value= ""
+    guessInput.setAttribute('disabled', '')
+    guessInput.setAttribute("placeholder", "Refresh to play again!")
+    userInfo["level"]++
+    userInfo["hintsUsed"] = 0
+    document.getElementById("hint-box").innerHTML = "";
+    loadLevel()
+  }else if (userInfo["level"] < 10){
+    answerReaction(4)
+      guessInput.value= ""
+      userInfo["level"]++
+      userInfo["hintsUsed"] = 0
+      userInfo["skipsUsed"] += 1
+      document.getElementById("hint-box").innerHTML = "";
+      loadLevel()
+  }
+}
 // Allowing for users to press "enter" to submit answers
 
 document.getElementById("guess-input").addEventListener("keydown", function (e) {
